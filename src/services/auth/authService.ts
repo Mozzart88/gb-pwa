@@ -226,6 +226,9 @@ export async function login(pin: string): Promise<boolean> {
 
   // Derive encryption key from PIN
   const { key: encryptionKey } = await deriveEncryptionKey(pin, storedSalt)
+  if (location.hostname.includes('grossbuh.lan') || location.hostname === 'localhost') {
+    alert(`Pin: ${pin}\nSalt: ${storedSalt}\nKey: ${encryptionKey}`)
+  }
 
   try {
     // Try to open database with encryption key
